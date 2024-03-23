@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { remult } from 'remult';
 import { Task } from 'src/shared/task';
 
@@ -7,15 +7,14 @@ import { Task } from 'src/shared/task';
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css']
 })
-export class TodoComponent {
+export class TodoComponent implements OnInit, OnDestroy {
   tasks: Task[] = []
   newTaskTitle= ''
   async addTask(){
     try {
-      const newTask = await this.taskRepo.insert({
+      await this.taskRepo.insert({
         title: this.newTaskTitle
       })
-      this.tasks.push(newTask)
       this.newTaskTitle = '';
     } catch (error: any){
       alert(error.message)
@@ -25,7 +24,6 @@ export class TodoComponent {
   async deleteTask(task: Task){
     try{
       await this.taskRepo.delete(task)
-      this.tasks = this.tasks.filter((t) => t !== task)
     } catch (error: any){
       alert(error.message)
     }
@@ -40,10 +38,16 @@ export class TodoComponent {
   }
   
   taskRepo = remult.repo(Task)
+  unSub = () => {}
 
   ngOnInit(){
-    this.taskRepo.find({where: {
+    this.unSub = this.taskRepo.liveQuery({where: {
       completed: undefined,
-    }}).then((tasks)=> (this.tasks = tasks))
+    }})
+    .subscribe((info) => (this.tasks = info.applyChanges(this.tasks)))
+  }
+
+  ngOnDestroy(){
+    this.unSub()
   }
 }

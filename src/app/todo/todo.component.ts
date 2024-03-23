@@ -10,6 +10,17 @@ import { Task } from 'src/shared/task';
 export class TodoComponent {
   tasks: Task[] = []
   newTaskTitle= ''
+  async addTask(){
+    try {
+      const newTask = await this.taskRepo.insert({
+        title: this.newTaskTitle
+      })
+      this.tasks.push(newTask)
+      this.newTaskTitle = '';
+    } catch (error: any){
+      alert(error.message)
+    }
+  }
 
   taskRepo = remult.repo(Task)
 

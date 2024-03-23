@@ -1,6 +1,6 @@
 <h1>Todos</h1>
 <main>
-    <form >
+    <form (submit)="addTask()">
         <input 
         [(ngModel)]="newTaskTitle"
         placeholder="What needs to be done?"

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { remult } from 'remult';
+import { TasksController } from 'src/shared/TasksController';
 import { Task } from 'src/shared/task';
 
 @Component({
@@ -50,4 +51,8 @@ export class TodoComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.unSub()
   }
+
+ async setAllCompleted(completed: boolean){
+  await TasksController.setAllCompleted(completed)
+ }
 }

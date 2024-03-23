@@ -6,7 +6,13 @@ import { Entity, Fields } from "remult";
 export class Task{
     @Fields.autoIncrement()
     id =0;
-    @Fields.string()
+    @Fields.string<Task>({
+        validate:task=> {
+            if(task.title.length< 3) {
+                throw new Error('Too short')
+            }
+        }
+    })
     title='';
     @Fields.boolean()
     completed = false;

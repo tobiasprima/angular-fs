@@ -9,6 +9,6 @@ export class Task{
     @Fields.string()
     title='';
     @Fields.boolean()
-    complted = false;
+    completed = false;
 }
 

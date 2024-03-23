@@ -22,6 +22,23 @@ export class TodoComponent {
     }
   }
 
+  async deleteTask(task: Task){
+    try{
+      await this.taskRepo.delete(task)
+      this.tasks = this.tasks.filter((t) => t !== task)
+    } catch (error: any){
+      alert(error.message)
+    }
+  }
+
+  async saveTask(task: Task) {
+    try{
+      await this.taskRepo.save(task)
+    } catch (error: any){
+      alert(error.message)
+    }
+  }
+  
   taskRepo = remult.repo(Task)
 
   ngOnInit(){

@@ -1,1 +1,15 @@
-<p>todo works!</p>
+<h1>Todos</h1>
+<main>
+    <form >
+        <input 
+        [(ngModel)]="newTaskTitle"
+        placeholder="What needs to be done?"
+        name="newTaskTitle"
+        />
+        <button>Add</button>
+    </form>
+<div *ngFor="let task of tasks">
+    <input type="checkbox" [(ngModel)]="task.completed" />
+    {{ task.title }}
+</div>
+</main>

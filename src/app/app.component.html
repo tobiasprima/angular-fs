@@ -8,5 +8,7 @@
 </main>
 </ng-container>
 <ng-container *ngIf="remult.authenticated()">
+    Helo {{ remult.user?.name}}
+    <button (click)="signOut()">SignOut</button>
     <app-todo></app-todo>
 </ng-container>

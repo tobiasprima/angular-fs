@@ -18,3 +18,10 @@ auth.post("/api/signIn", (req,res)=> {
         res.status(404).json('Invalid User')
     }
 })
+
+auth.get("/api/currentUser", (req,res)=> res.json(req.session!['user']))
+
+auth.post("/api/signOut", (req,res)=> {
+    req.session!["user"] = null
+    res.json('ok')
+})

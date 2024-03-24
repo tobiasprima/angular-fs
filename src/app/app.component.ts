@@ -28,4 +28,12 @@ export class AppComponent {
       error: (error) => alert(error.error)
     })
   }
+
+  signOut(){
+    this.http.post("/api/signOut", {}).subscribe(()=> this.remult.user = undefined)
+  }
+
+  ngOnInit(){
+    this.http.get<UserInfo>("/api/currentUser").subscribe((user)=> (this.remult.user = user))
+  }
 }

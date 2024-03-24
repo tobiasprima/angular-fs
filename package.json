@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "start": "tsx src/server",
     "dev": "ng serve --proxy-config proxy.conf.json",
     "dev-node": "tsx watch src/server",
     "build": "ng build",

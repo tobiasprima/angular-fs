@@ -1,6 +1,6 @@
 <h1>Todos</h1>
 <main>
-    <form (submit)="addTask()">
+    <form (submit)="addTask()" *ngIf="taskRepo.metadata.apiInsertAllowed()">
         <input 
         [(ngModel)]="newTaskTitle"
         placeholder="What needs to be done?"
@@ -16,7 +16,7 @@
      />
     <input [(ngModel)]="task.title">
     <button (click)="saveTask(task)">Save</button>
-    <button (click)="deleteTask(task)">Delete</button>
+    <button (click)="deleteTask(task)" *ngIf="taskRepo.metadata.apiDeleteAllowed()">Delete</button>
 </div>
 <div>
     <button (click)="setAllCompleted(true)">Set All Completed</button>

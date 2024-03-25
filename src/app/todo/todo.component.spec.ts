@@ -18,4 +18,9 @@ describe('TodoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have form to add new todo', ()=> {
+    const element = fixture.debugElement.nativeElement
+    expect(element.nativeElement)
+  })
 });

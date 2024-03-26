@@ -20,7 +20,7 @@ describe('TodoComponent', () => {
   });
 
   it('should have form to add new todo', ()=> {
-    const element = fixture.debugElement.nativeElement
-    expect(element.nativeElement)
+    const compiled = fixture.nativeElement.textContent;
+    expect(compiled).toContain('What needs to be done?');
   })
 });
